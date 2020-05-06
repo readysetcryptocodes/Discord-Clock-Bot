@@ -1,0 +1,30 @@
+{
+  "name": "Discord-Clock-Bot",
+  "version": "2.0.0",
+  "description": "This bot dynamically updates a Voice Channel on your Discord server",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "moment": "^2.24.0",
+    "dotenv": "^8.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "12.16.2",
+    "npm": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/readysetcryptocodes/Discord-Clock-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/readysetcryptocodes/Discord-Clock-Bot/issues"
+  },
+  "homepage": "https://github.com/readysetcryptocodes/Discord-Clock-Bot#readme"
+}
