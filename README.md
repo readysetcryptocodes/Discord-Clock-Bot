@@ -4,7 +4,7 @@ This bot dynamically updates a Voice Channel on your Discord server
 
 ### Features
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![Display](https://readyset.trade/wp-content/uploads/2020/05/gg.png)
 
 1. Adds the current time (in 24H format) for UTC-4 and UTC0 using moment js library
 2. Clock emoji added based on time
