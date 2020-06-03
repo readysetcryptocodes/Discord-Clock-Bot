@@ -20,16 +20,16 @@ client.once('ready', async () => {
 	console.log('Oh, look at the time!')
 	client.user.setActivity('The Clock', {type: 'WATCHING'})
 
-	var now = moment().utcOffset(-4).format("HH:mm"); //defaulted to EST
-	var gmt = moment().utcOffset(0).format("HH:mm z"); //defaulted to GMT
+	var now = moment().utcOffset(-4).format("HH:mm");
+	var gmt = moment().utcOffset(0).format("HH:mm z");
 	var clocktime = '';
 
-	function timeClock(now) // sets clocktime to clock emoji based on hour. 
-		{ // there's probably a better way to do this but working with emojis in discord is annoying, so this is easier
-		console.log(`Calling timeClock`); 
+	function timeClock(now) 
+		{
+		console.log(`Calling timeClock`);
 		if (now.includes('00:') || now.includes('12:')) 
 			{
-			clocktime = '🕛'; 
+			clocktime = '🕛';
 			return clocktime;
 			}
 		else if (now.includes('01:') || now.includes('13:')) 
@@ -72,7 +72,12 @@ client.once('ready', async () => {
 			clocktime = '🕗';
 			return clocktime;
 			}
-		else if (now.includes('09:') || now.includes('21:')) 
+		else if (now.includes('09:')) 
+			{
+			clocktime = '🎉';
+			return clocktime;
+			}
+		else if (now.includes('21:')) 
 			{
 			clocktime = '🕘';
 			return clocktime;
@@ -94,7 +99,7 @@ client.once('ready', async () => {
 			}
 		}
 
-	async function timeout() // time async func to delay output until seconds == 0
+	async function timeout() 
 		{
 		console.log(`Calling timeout`);
 		var current = new Date();
@@ -103,7 +108,7 @@ client.once('ready', async () => {
 		return await new Promise(resolve => setTimeout(resolve,timeToNextTick));
 		}
 
-	async function asyncGenerator() // main async func that recursively calls itself 
+	async function asyncGenerator() 
 		{
 		console.log(`Calling asyncGenerator`);
 		try
@@ -113,10 +118,10 @@ client.once('ready', async () => {
 			var seconds = now.getSeconds();
 			if( minutes != '00' && seconds == '00' )
 				{
-				now = moment().utcOffset(-4).format("HH:mm"); // using moment 
+				now = moment().utcOffset(-4).format("HH:mm");
 				gmt = moment().utcOffset(0).format("HH:mm z");
 				console.log(`Here's The New Time: ${clocktime}${now} EST•${gmt}`);
-				await client.channels.cache.get('YOUR VOICE CHANNEL ID').setName(clocktime+now+' EST'+'•'+gmt);
+				await client.channels.cache.get('704272344369332265').setName(clocktime+now+' EST'+'•'+gmt);
 				console.log(`Loop Completed!`);
 				await timeout();
 				return asyncGenerator();
@@ -128,7 +133,7 @@ client.once('ready', async () => {
 				gmt = moment().utcOffset(0).format("HH:mm z");
 				clocktime = timeClock(now);
 				console.log(`Here's The New Time: ${clocktime}${now} EST•${gmt}`);
-				await client.channels.cache.get('YOUR VOICE CHANNEL ID').setName(clocktime+now+' EST'+'•'+gmt);
+				await client.channels.cache.get('704272344369332265').setName(clocktime+now+' EST'+'•'+gmt);
 				console.log(`Loop Completed!`);
 				await timeout();
 				return asyncGenerator();
@@ -138,10 +143,14 @@ client.once('ready', async () => {
 				return asyncGenerator();
 				}
 			}
-		catch (error) {console.log(`Error In asyncGenerator Loop!`)}
+			catch (error) {
+				console.log(`Error In asyncGenerator Loop!`)
+				await timeout();
+				return asyncGenerator();
+				}
 		}
 
-	while (true) // main while loop to start async functions
+	while (true) 
 		{
 		console.log(`Starting The Clock!`);
 		now = moment().utcOffset(-4).format("HH:mm");
@@ -155,6 +164,10 @@ client.once('ready', async () => {
 			} 
 		catch (error) {console.log('Error In Main While Loop!')}
 		console.log('Main Loop Completed!');
+		console.log(`Calling timeout start`);
+		await timeout();
+		console.log(`Calling asyncGenerator start`);
+		return asyncGenerator();
 		}
 });
 
